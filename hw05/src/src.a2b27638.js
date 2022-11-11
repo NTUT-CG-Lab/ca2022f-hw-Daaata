@@ -97408,6 +97408,8 @@ class Camera {
   drawResults(faces, triangulateMesh, boundingBox) {
     (0, _util.drawResults)(this.ctx, faces, triangulateMesh, boundingBox);
     runModel(view => {
+      console.log(faces);
+
       /*眉毛控制*/
       view.browRY = (faces[0].keypoints[27].y - faces[0].keypoints[223].y -7.5)/2;
       view.browLY = (faces[0].keypoints[257].y - faces[0].keypoints[443].y -7.5)/2;
