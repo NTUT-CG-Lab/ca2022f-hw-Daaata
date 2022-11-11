@@ -97409,20 +97409,43 @@ class Camera {
     (0, _util.drawResults)(this.ctx, faces, triangulateMesh, boundingBox);
     runModel(view => {
       /*眉毛控制*/
+      view.browRY = (faces[0].keypoints[27].y - faces[0].keypoints[223].y -7.5)/2;
+      view.browLY = (faces[0].keypoints[257].y - faces[0].keypoints[443].y -7.5)/2;
+      view.browRX = (faces[0].keypoints[223].x-250)/500*(-1);
+      view.browLX = (faces[0].keypoints[443].x-250)/500*(-1);
 
       /*左右擺頭*/
+      view.angleX = (faces[0].keypoints[226].z-faces[0].keypoints[446].z)/2;
 
       /*上下點頭*/
       //抖動
-
+      //view.angleY = (faces[0].keypoints[151].z-faces[0].keypoints[175].z)*2;
       //穩定
+      view.angleY = (faces[0].keypoints[168].y-250)/100*30*(-1);
 
       /*歪頭*/
-
+      view.angleZ = -((faces[0].keypoints[151].x) - (faces[0].keypoints[1].x));
 
       /*眼睛控制*/
+      if((faces[0].keypoints[145].y)-(faces[0].keypoints[159].y) < 3){
+        view.eyeLOpen = 0; //右眼閉
+      }
+      else{
+        view.eyeLOpen = 1; //右眼開
+      }
+      if((faces[0].keypoints[374].y)-(faces[0].keypoints[386].y) < 3){
+        view.eyeROpen = 0;
+      }
+      else{
+        view.eyeROpen = 1;
+      }
 
       /*嘴巴控制*/
+      if((faces[0].keypoints[14].y) - (faces[0].keypoints[13].y) < 3){
+        view.mouthOpenY = 0;
+      }else{
+        view.mouthOpenY = (faces[0].keypoints[14].y) - (faces[0].keypoints[13].y);
+      }
 
     });
   }
